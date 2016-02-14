@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<h2>
+<a id="princevergithubio" class="anchor" href="#princevergithubio" aria-hidden="true"><span class="octicon octicon-link"></span></a>Archives</h2><br>
+<ul>
+  {% for post in site.posts %}
+ 
+    <article id="main_content" class="post">
+
+      <p><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{ post.category }}</a>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Written on {{ post.date | date: "%B %e, %Y" }}&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;By   Princever</p>
+
+        
+       
+        
+      
+
+      
+
+    </article>
+
+  
+  {% endfor %}
+</ul>
