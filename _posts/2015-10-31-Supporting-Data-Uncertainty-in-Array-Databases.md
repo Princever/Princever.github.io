@@ -6,7 +6,7 @@ category: "Algorithm and Data Stucture"
 
 This is about my summation about 「Supporting Data Uncertainty in Array Databases」
 
-###Issue And Problem
+### Issue And Problem ###
 Uncertain data management has been recently studied in **Large-scale scientific** applications which have noisy and uncertain, and its key is to capturing uncertainty. In this paper, we focus on addressing position uncertainty lies in finding a storage and evaluation strategy that minimizes both I/O and CPU costs while returning all tuples that satisfy the query with a required probability. 
 
 
