@@ -66,78 +66,16 @@
          <ul>
 
 <article class="post">
-  <h1>AirPlay</h1>
+  <h1>Blog setup</h1>
 
   <div class="entry">
-    <p>Here&#39;s a blog about realizing the AirPlay Funtion on a Raspberry Pi.  </p>
-
-<p>The equipments I used are:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Raspberry * 1;
-Macbook Pro * 1;
-Ipad * 1;
-Earphone * 1;
-</code></pre></div>
-<hr>
-
-<p>So, with above equipments got ready, Let&#39;s update the software source first.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">apt-get update
-</code></pre></div>
-<p><img src="/res/images/AirPlay/1.png" alt=""></p>
-
-<p>The second step is to change the audio output settings. As AirPlay have default settings(HDMI), since the we don&#39;t have a external display here, so change the settings to only output audio here.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">amixer cset numid=3 1
-</code></pre></div>
-<p><img src="/res/images/AirPlay/2.png" alt=""></p>
-
-<p>Now it&#39;s the turn of dealing with software on Linux of my Raspberry Pi. Firstly install the shairport dependencies pack here.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">apt-get install git libao-dev libssl-dev libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl avahi-utils libmodule-build-perl
-</code></pre></div>
-<p><img src="/res/images/AirPlay/3.png" alt=""></p>
-
-<p>The next step is to install the Perl NET-SDP pack cause the iOS system requires this pack to support the airplay function. Using the following command line instruction:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">git clone https://github.com/njh/perl-net-sdp.git perl-net-sdp
-</code></pre></div>
-<p><img src="/res/images/AirPlay/4.png" alt=""></p>
-
-<p>Then</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cd perl-net-sdp
-perl Build.PL
-./Build
-./Build test
-./Build install
-</code></pre></div>
-<p><img src="/res/images/AirPlay/5.png" alt=""></p>
-
-<p>OK, now we can install the shairport, which is an airplay emulator can help us finish the job.
-Using</p>
-<div class="highlight"><pre><code class="language-" data-lang="">cd ../
-</code></pre></div>
-<p>to back to the upper directory，running following instructions in order:</p>
-<div class="highlight"><pre><code class="language-" data-lang="">git clone https://github.com/hendrikw82/shairport.git
-</code></pre></div>
-<p><img src="/res/images/AirPlay/6.png" alt=""></p>
-<div class="highlight"><pre><code class="language-" data-lang="">cd shairport
-make
-</code></pre></div>
-<p><img src="/res/images/AirPlay/7.png" alt=""></p>
-
-<p>Well done! We can start the airplay service right now! Here AirPrince is the name of my AirPlay device(Raspberry in this situation).</p>
-<div class="highlight"><pre><code class="language-" data-lang="">./shairport.pl -a AirPrince
-</code></pre></div>
-<p><img src="/res/images/AirPlay/8.png" alt=""></p>
-
-<p>Turn on WIFI on iPad to search AirPlay devices for airplaying, and plug the earphone in the Raspberry Pi for enjoying the airplayed music now!</p>
-
-<p><img src="/res/images/AirPlay/9.png" alt="">
-<img src="/res/images/AirPlay/10.png" alt="">
-<img src="/res/images/AirPlay/11.png" alt=""></p>
-
-<p>Thanks for viewing! Don&#39;t forget following me on <a href="https://github.com/Princever">GitHub</a>!</p>
+    <p>不得不说调整封面，图片，模板还是花了很长时间，不过我有<a href="https://just-cj.github.io">陈俊大神</a>的帮助天黑都不怕。<br />
+封面放上MIKU和LUKA欸嘿嘿嘿~</p>
 
   </div>
 
   <div class="date">
-    Written on April 17, 2015
+    Written on April 16, 2015
   </div>
 
 
