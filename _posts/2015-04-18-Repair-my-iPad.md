@@ -1,7 +1,7 @@
 ---  
 layout: post
 title: Repair My iPad's Screen
-categories: Life In ZJU
+category: "Life In ZJU"
 ---  
 
 Well, simple thing as you have seen in this title. My iPad fell off my bed and turned into this bad situation:

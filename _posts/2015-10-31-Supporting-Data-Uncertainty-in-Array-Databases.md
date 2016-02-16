@@ -1,7 +1,7 @@
 ---  
 layout: post
 title: Supporting Data Uncertainty in Array Databases
-categories: Algorithm and Data Stucture
+category: "Algorithm and Data Stucture"
 --- 
 
 This is about my summation about 「Supporting Data Uncertainty in Array Databases」

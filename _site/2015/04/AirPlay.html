@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>煌めくどんな星も、君を照らすから - Princever.GitHub.io by Princever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-light.css" media="screen">
+     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap.min.responsive.css" rel="stylesheet">
+    <!--link href="/stylesheets/local.css" rel="stylesheet"-->
+    <!--link href="/stylesheets/pygments.css" rel="stylesheet"-->
+    <link rel='icon' href="/ico/pic.ico" type='image/x-ico' /> 
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">煌めくどんな星も、君を照らすから - Princever.GitHub.io</h1>
+      <h2 class="project-tagline">Princever&#39;s blog</h2>
+
+
+    </section>
+   
+
+    <section class="main-content">
+    <div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+        <!--  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar">1</span>
+             <span class="icon-bar">2</span>
+             <span class="icon-bar">3</span>
+         </a> -->
+
+        <a class="brand"  href="/index.html">HOME PAGE</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="http://www.baidu.com">Baidu</a></li>
+            <li><a href="/pages/downloads.html">Downloads</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="/pages/contact.html">Contact</a></li>
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+ <footer class="site-footer">
+      <h1>
+<a id="princevergithubio" class="anchor" href="#princevergithubio" aria-hidden="true"><span class="octicon octicon-link"></span></a>Princever.github.io</h1>
+
+
+
+<p>Sharing and enjoying my life!</p><br>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+      <div class="span9">
+        
+     
+         <ul>
+
+<article class="post">
+  <h1>AirPlay</h1>
+
+  <div class="entry">
+    <p>Here&#39;s a blog about realizing the AirPlay Funtion on a Raspberry Pi.  </p>
+
+<p>The equipments I used are:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">Raspberry * 1;
+Macbook Pro * 1;
+Ipad * 1;
+Earphone * 1;
+</code></pre></div>
+<hr>
+
+<p>So, with above equipments got ready, Let&#39;s update the software source first.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">apt-get update
+</code></pre></div>
+<p><img src="/res/images/AirPlay/1.png" alt=""></p>
+
+<p>The second step is to change the audio output settings. As AirPlay have default settings(HDMI), since the we don&#39;t have a external display here, so change the settings to only output audio here.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">amixer cset numid=3 1
+</code></pre></div>
+<p><img src="/res/images/AirPlay/2.png" alt=""></p>
+
+<p>Now it&#39;s the turn of dealing with software on Linux of my Raspberry Pi. Firstly install the shairport dependencies pack here.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">apt-get install git libao-dev libssl-dev libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl avahi-utils libmodule-build-perl
+</code></pre></div>
+<p><img src="/res/images/AirPlay/3.png" alt=""></p>
+
+<p>The next step is to install the Perl NET-SDP pack cause the iOS system requires this pack to support the airplay function. Using the following command line instruction:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">git clone https://github.com/njh/perl-net-sdp.git perl-net-sdp
+</code></pre></div>
+<p><img src="/res/images/AirPlay/4.png" alt=""></p>
+
+<p>Then</p>
+<div class="highlight"><pre><code class="language-" data-lang="">cd perl-net-sdp
+perl Build.PL
+./Build
+./Build test
+./Build install
+</code></pre></div>
+<p><img src="/res/images/AirPlay/5.png" alt=""></p>
+
+<p>OK, now we can install the shairport, which is an airplay emulator can help us finish the job.
+Using</p>
+<div class="highlight"><pre><code class="language-" data-lang="">cd ../
+</code></pre></div>
+<p>to back to the upper directory，running following instructions in order:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">git clone https://github.com/hendrikw82/shairport.git
+</code></pre></div>
+<p><img src="/res/images/AirPlay/6.png" alt=""></p>
+<div class="highlight"><pre><code class="language-" data-lang="">cd shairport
+make
+</code></pre></div>
+<p><img src="/res/images/AirPlay/7.png" alt=""></p>
+
+<p>Well done! We can start the airplay service right now! Here AirPrince is the name of my AirPlay device(Raspberry in this situation).</p>
+<div class="highlight"><pre><code class="language-" data-lang="">./shairport.pl -a AirPrince
+</code></pre></div>
+<p><img src="/res/images/AirPlay/8.png" alt=""></p>
+
+<p>Turn on WIFI on iPad to search AirPlay devices for airplaying, and plug the earphone in the Raspberry Pi for enjoying the airplayed music now!</p>
+
+<p><img src="/res/images/AirPlay/9.png" alt="">
+<img src="/res/images/AirPlay/10.png" alt="">
+<img src="/res/images/AirPlay/11.png" alt=""></p>
+
+<p>Thanks for viewing! Don&#39;t forget following me on <a href="https://github.com/Princever">GitHub</a>!</p>
+
+  </div>
+
+  <div class="date">
+    Written on April 17, 2015
+  </div>
+
+
+ <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'Princever';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+</ul>
+      </div>
+
+    <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="/pages/archives.html">Archives</a>
+                </li><li><a href="/pages/tags.html">Tags</a>
+
+<!--
+
+                </li><li><a href="http://darryo.github.io/feeds/all.atom.xml" rel="alternate">Atom feed</a></li>
+                <li><a href="http://darryo.github.io/feeds/rss.xml" rel="alternate">RSS feed</a></li>
+-->
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+              
+                
+                <li><a href="/categories/system.html">System</a></li>
+                <li><a href="/categories/algorithmanddatastucture.html">Algorithm and Data Stucture</a></li>
+                <li><a href="/categories/android.html">Android</a></li>
+                <li><a href="/categories/embeddedsystem.html">Embedded System</a></li>
+                <li><a href="/categories/linux.html">Linux</a></li>
+                 <li><a href="/categories/lifeinZJU.html">Life In ZJU</a></li>
+                <li><a href="/categories/learningJapanese.html">Learning Japanese</a></li>
+                <li><a href="/categories/unclassified.html">Unclassified</a></li>
+                
+                   
+            </ul>
+            </div>
+
+
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="https://github.com/Princever">GitHub</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>
+        </div>
+        </div>
+        </div>
+
+    
+      <footer class="site-footer">
+
+        <span class="site-footer-credits">This page was designed by <a href="http://weibo.com/u/1831185433">Prince</a>. Welcome to my <a href="https://github.com/Princever">Github</a>.</span>
+      </footer>
+
+       
+
+    </section>
+
+  
+  </body>
+</html>
+

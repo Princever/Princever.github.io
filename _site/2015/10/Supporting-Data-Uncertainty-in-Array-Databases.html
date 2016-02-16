@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>煌めくどんな星も、君を照らすから - Princever.GitHub.io by Princever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-light.css" media="screen">
+     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap.min.responsive.css" rel="stylesheet">
+    <!--link href="/stylesheets/local.css" rel="stylesheet"-->
+    <!--link href="/stylesheets/pygments.css" rel="stylesheet"-->
+    <link rel='icon' href="/ico/pic.ico" type='image/x-ico' /> 
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">煌めくどんな星も、君を照らすから - Princever.GitHub.io</h1>
+      <h2 class="project-tagline">Princever&#39;s blog</h2>
+
+
+    </section>
+   
+
+    <section class="main-content">
+    <div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+        <!--  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar">1</span>
+             <span class="icon-bar">2</span>
+             <span class="icon-bar">3</span>
+         </a> -->
+
+        <a class="brand"  href="/index.html">HOME PAGE</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="http://www.baidu.com">Baidu</a></li>
+            <li><a href="/pages/downloads.html">Downloads</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="/pages/contact.html">Contact</a></li>
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+ <footer class="site-footer">
+      <h1>
+<a id="princevergithubio" class="anchor" href="#princevergithubio" aria-hidden="true"><span class="octicon octicon-link"></span></a>Princever.github.io</h1>
+
+
+
+<p>Sharing and enjoying my life!</p><br>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+      <div class="span9">
+        
+     
+         <ul>
+
+<article class="post">
+  <h1>Supporting Data Uncertainty in Array Databases</h1>
+
+  <div class="entry">
+    <p>This is about my summation about 「Supporting Data Uncertainty in Array Databases」</p>
+
+<h3>Issue And Problem</h3>
+
+<p>Uncertain data management has been recently studied in <strong>Large-scale scientific</strong> applications which have noisy and uncertain, and its key is to capturing uncertainty. In this paper, we focus on addressing position uncertainty lies in finding a storage and evaluation strategy that minimizes both I/O and CPU costs while returning all tuples that satisfy the query with a required probability. </p>
+
+<p>In multi-dimensional array(chunk-based storage scheme obj close likely to be stored in the same chunk), a tuple some of whose <strong>value attribute</strong> is uncertain(even some time dimension is uncertain). This means <strong>uncertainty of position</strong> lead to a tuple belong to multiple cells(Position uncertainty).</p>
+
+<p>1.Show subarray and structure-join are two most important array operations.</p>
+
+<p>2.For subarray, store-multiple: bounds the overhead of querying by <strong>placing a few replicas(making the query region very large)</strong> for the tuples with large variances.</p>
+
+<p>3.For <strong>structure-join</strong>: new evaluation strategy — subarray-based join(SBJ) without a prebuilt index and employs tight conditions for running repeated subarray queries on inner array of join.</p>
+
+<p>4.Using synthetic workloads and the Sloan Digital Sky Survey. </p>
+
+<h3>Array Data</h3>
+
+<p>Background: A database contains a collection of arrays. Each arrays represent as <strong>A(D<sup>d</sup>;V<sup>m</sup>)</strong>, sometimes <strong>A<sup>d</sup></strong>. e.g In SDSS, A<sup>2</sup>(x-loc, y-loc; luminosity, color).</p>
+
+<p>For dimension attributes: </p>
+
+<p>1.discrete — requires a linear order.</p>
+
+<p>2.continuous — user-defined mapping function to discretizing the domain in to an ordered set of sets. To used as <strong>index</strong>.</p>
+
+<p>multiple values of a dimension value lead to mapping into the <strong>same cell</strong>. Multiply tuples in a cell.</p>
+
+<p>Define the tuple’s possible range Rt as a hyper- rectangle within which the tuple existence probability is (approximately) 1. 
+Construct Rt by taking t’s marginal distribution, fi of each uncertain dimension: </p>
+
+<p>1.fi~U(a, b) —— [a, b], p = 1; </p>
+
+<p>2.fi~N(μ, σ), possible range (μ−3σ, μ+3σ) p = 0.997. </p>
+
+<p>3.fi~<strong>an arbitrary distribution</strong> with mean μ and standard deviation σ, define the possible range to be (μ − kσ, μ + kσ) with a sufficiently large k chosen based on <strong>Chebyshev’s inequality</strong>(possible region Rt to the boundary of cells).</p>
+
+<h3>Array Algebra</h3>
+
+<p>+Value-based: operate <strong>only on the value attributes</strong> of tuples.</p>
+
+<p>+Structure-based: operators operate on <strong>dimension attributes</strong> and optionally on <strong>value attributes</strong>:</p>
+
+<p>1.Subarray takes an array A and a condition θ on the dimension attributes, and <strong>returns a new array with the tuples that satisfy the condition θ</strong>. The output array always has the same dimensions as the input, but usually fewer cells and tuples. </p>
+
+<p>2.Structure-Join (SJoin) takes as input an array A<sup>d</sup>, a second array B<sup>d</sup> of the same dimensionality, and a join condition θ. SJoin(A, B, θ) <strong>returns an array C<sup>2d</sup></strong>, where the cell C[i<sub>1</sub>, · · · , i<sub>d</sub>, i<sub>d+1</sub>, · · · , i<sub>2d</sub>] contains the result of θ-join between the tuples in A[i<sub>1</sub>,··· ,i<sub>d</sub>] and the tuples in B[i<sub>d+1</sub>,··· ,i<sub>2d</sub>]. The equivalent expression is R<sub>A</sub> ⋈<sub>θ</sub> R<sub>B</sub>.</p>
+
+<p>3.If the dimension attributes are continuous-valued, θ takes a form of proximity join. A common form is linear proximity (a.k.a. l<sub>1</sub>-distance) join, <strong>|A.d<sub>i</sub> −B.d<sub>i</sub>| &lt; δ</strong> for each dimension attribute d<sub>i</sub>. While the tuples may belong to multiple cells with non-zero probabilities, so the join between A and B must return <strong>all pairs</strong> of tuples that satisfies. first, leverage the semantics of cross-product in the above <strong>SJoin definition</strong> involves <strong>pairing each cell in A with each cell in B</strong> and then pairing the tuples within those cells. Define probabilistic Structure-Join as follows: Given A<sup>d</sup> and B<sup>d</sup>, a join condition θ, and a probability threshold λ, SJoin(A,B, θ, λ) returns an array C<sup>2d</sup> where C[i<sub>1</sub>, · · · , i<sub>d</sub>, i<sub>d+1</sub>, · · · , i<sub>2d</sub>] contains the result of probabilistic θ-join, <strong>A[i<sub>1</sub>,··· ,i<sub>d</sub>] ⋈<sub>θ,λ</sub> B[i<sub>d+1</sub>,··· ,i<sub>2d</sub>] = {(t<sub>1</sub>,t<sub>2</sub>)|t<sub>1</sub> ∈ A[i<sub>1</sub>,··· ,i<sub>d</sub>], t2 ∈ B[i<sub>d+1</sub>,··· ,i<sub>2d</sub>], ∫∫<sub>θ</sub> f<sub>t1</sub>(x)·f<sub>t2</sub>(y)dxdy ≥ λ}</strong>. Many other structure operators can be implemented using Subarray and Structure-Join.</p>
+
+<h3>Native support for subarray</h3>
+
+<p><strong>Store-All</strong>: One solution is to store a copy of the tuple in <strong>each cell</strong> of the tuple’s possible range.</p>
+
+<p><strong>Store-Mean</strong>: To reduce storage overheads, we next consider storing a tuple <strong>only once based on the mean values</strong> of its dimension attributes. Given a hyper-rectangle query region Q, its expanded query region Q ̃ is a super hyper- rectangle Q ̃ (⊇ Q) such that any tuple whose possible range overlaps with Q has at least one copy stored in C(Q ̃) </p>
+
+<p><strong>Store-Multiple</strong>: A scheme that employs <strong>limited replication</strong> of tuples and guarantees that from any cell in a tuple’s possible range, walking at most <strong>k cells(the step size)</strong> along each dimension is able to find a copy of the tuple. </p>
+
+<h3>Support for structure join</h3>
+
+<p>Subarray-based Join (SBJ)</p>
+
+<p>The basic idea is that for each outer <strong>cell C<sub>A</sub></strong>, form a <strong>subarray condition θ<sub>CA</sub></strong> on the inner array B, run the Subarray query <strong>on B to retrieve relevant tuples</strong>, and finally <strong>pair the A tuples and B tuples</strong> for exact evaluation using integration.
+Given a tuple t<sub>A</sub> , let (l , u) denote the lower and upper bounds.
+For each tuple t<sub>A</sub> from A, <strong>expand its possible range by δ</strong> on each dimension, denoted by I<sub>t<sub>A</sub></sub> , then pair t<sub>A</sub> with all tuples t<sub>B</sub> from B whose possible ranges <strong>overlap with I<sub>t<sub>A</sub></sub></strong>.
+When A is stored using <strong>store-mean</strong>: relaxing the condition using the minimum lower bound and maximum upper bound of possible ranges of all tuples in C<sub>A</sub>.
+When A is stored using <strong>store-multiply</strong>: do not need to relax the join condition.</p>
+
+<h3>Algorithm for Subarray-based Join (SBJ)</h3>
+<div class="highlight"><pre><code class="language-" data-lang="">for each read block RA in A do 
+    toRead.clear(); 
+    map.clear(); 
+    for each cell CA in RA do 
+        loadToMemory(CA ); 
+        Q ← formQueryRegion(CA ); 
+        S ← Subarray(B, Q);
+        for each cell CB in S do 
+            toRead.add(CB ); 
+            map.get(CB ).add(CA ); 
+    for each cell CB in toRead do 
+        loadToMemory(CB );        
+        for each cell CA in map.get(CB) do 
+            for each tuple tA in CA do 
+                for each tuple tB in CB do 
+                    filter(tA , tB ); 
+                    validate(tA , tB ); 
+removeDuplicates(); 
+</code></pre></div>
+<h3>Novelty of The Proposed Approach</h3>
+
+<p>1.Proposing a new way of storing tuples and optimized CPU running time. Making native support for <strong>subarray</strong> and <strong>structure join</strong>.</p>
+
+<p>2.The new storage and evaluation schemes find a <strong>balance</strong> between <strong>space</strong> and <strong>time</strong> with the step size k in <strong>Store-Multiple</strong>.</p>
+
+<p>3.Proposed an algorithm about <strong>Subarray-based Join</strong> and define the operation of SBJ.</p>
+
+<h3>Summation of Experiments</h3>
+
+<p>Datasets: SDSS(dimension attributes: rowc, cols). Describes each dimension attribute using a Gaussian distribution.</p>
+
+<h3>Evaluation of Subarray Techniques</h3>
+
+<h4>Expt 1: Cost Breakdown</h4>
+
+<p>I/O cost first decreasesand then increases. So the optimal I/O cost appears in the middle of the spectrum of k(step size)</p>
+
+<p>The CPU cost does not change with the step size when the probability threshold λ is high</p>
+
+<p>the optimal step size shifts right when the average possible range increases; it shifts left when λ is very small or the per integration cost is high, and it increases with the query region size.</p>
+
+<h4>Expt 2: Model Accuracy</h4>
+
+<p>Pick 3 x 3 query region for 2D datasets and 2 x 2 x 2 for 3D datasets that evenly scattered over the array.</p>
+
+<p>Model returns the optimal step size in 89.6% of workloads when the tuples’ μ values are uniformly distributed and in 83.3% of workloads when the tuples’ μ values are normally distributed. In those cases when our model selects a suboptimal step size, the average performance loss is 2.72%.</p>
+
+<h4>Expt 3: Comparing Schemes</h4>
+
+<p>Store-mutiple works the best. when all tuples have small possible ranges, the three storage schemes do not differ much. However, for datasets when Sσ = 100, store-all often incurs tremendous storage overheads and I/O costs in querying. When query grows larger, their difference is reduced because the optimal step size of store-multiple tends to be larger. This means that infrequent replication of tuples works fine if q is large, and most tuples have only one copy under store-multiple, similar to store-mean. </p>
+
+<h3>Evaluation of Structure-Join</h3>
+
+<h4>Expt 4: Subarray-Based Join(SBJ)</h4>
+
+<p>Demonstrate that SBJ’s performance is sensitive to the
+storage scheme.</p>
+
+<p>For a fixed kout, the optimal inner step size k∗ is in the middle in
+of its spectrum.</p>
+
+<p>Once kin is fixed, the optimal k∗ also occurs in the middle </p>
+
+<p>The model returns the optimal step sizes in most cases and the overall performance loss is within 6% (if any).</p>
+
+<h4>Expt 5: Comparison of Join Algorithms</h4>
+
+<p>For all datasets tested, SBJ outperforms BNLJ, 46.3% better when λ=0.9 and 91.3% better when λ=0.01. SBJ saves both I/Os on the inner array and the CPU cost by reducing the number of tuples to be filtered. </p>
+
+<p>SBJ’s performance is not sensitive to large variance tuples when λ=0.9, but shows an increase in cost when λ=0.01, because many more tuples will be returned as join results.</p>
+
+<h3>Case Study using SDSS Datasets</h3>
+
+<h4>Expt 6: Storage</h4>
+
+<p>Store- multiple configured with step size <1,1> by our cost model incurs much less storage cost than the index schemes, and it approximates store-mean but with much better performance. Specifically, over 79% tuples have only 1 copy and over 92% tuples have at most 3 copies.</p>
+
+<h4>Expt 7: Subarray</h4>
+
+<p>Comparison to results of synthetic data: Store-mean with fences is orders of magnitude slower than other schemes when q ≤ 1%, and is 7 times slower than store-multiple when q =10%. </p>
+
+<p>Comparison to index-based methods: store-multiple is 1.7 - 4.3 times faster than U-index and 8.3 - 18.3 times faster than G-index. In contrast, probing on-disk indexes incurs tremendous leaf I/Os due to the nature of multi-path search in R-tree based indexes. Based on profiling numbers, when we vary q from 0.01% to 10%, the accessed child nodes averaged over all non-leaf nodes are in the range of (10.33%, 52.93%) for U-index and (22.13%, 66.29%) for G-index.</p>
+
+<h4>Expt 8: Structure-join</h4>
+
+<p>Comparison to Index Join: IBJ with U-index works poorly, 1 to 2 orders of magnitude worse than SBJ. Based on profiling results for 1.89M tuples, the index I/O dominates. With store-mean, the large-variance tuples lead to large range queries on the inner and most (even all) of the leaf nodes are accessed. With the (rare) existence of such tuples, the average number of U-index leaf nodes accessed per outer tuple is 38.9. Further, such tuples destroy the locality of caching for the same reason. For the 76830 outer tuples, with a 91.2% cache hit rate, the amount of leaf I/Os is already 263498, more than 10 times worse than SBJ. In contrast, store- multiple addresses large variance tuples with replication and finds a good tradeoff between tuple replication and query expansion. In addition, SBJ puts a tight predicate on the inner array to read relevant inner cells, and utilizes the memory to form blocks of outer tuples so that many of them can share the inner I/Os. As such, SBJ largely preserves the data locality that the array database provides for the access to dimension attributes. To verity this, we compared SBJ with an ideal case where each relevant inner chunk (i.e., con-taining the join candidates for some outer tuple) is visited exactly once. SBJ approximates the ideal case with 1.6x-2x I/Os.</p>
+
+<p>Comparison to BNLJ: The difference between SBJ and BNLJ is magnified as BNLJ scans the whole inner array for each outer block, which is much bigger in SDSS than the synthetic datasets.</p>
+
+<p>Scalability: SBJ scales the best among the three. For the same outer block and the same δ, the subarray region formed us- ing Proposition 4.3 is exactly the same. However, bigger datasets have more tuples with large possible ranges and increased chance of having tuple copies in formed subarray regions, which results in a modest increase of the cost.</p>
+
+<p>Thanks for viewing! Don&#39;t forget following me on <a href="https://github.com/Princever">GitHub</a>!</p>
+
+  </div>
+
+  <div class="date">
+    Written on October 31, 2015
+  </div>
+
+
+ <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'Princever';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+</ul>
+      </div>
+
+    <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="/pages/archives.html">Archives</a>
+                </li><li><a href="/pages/tags.html">Tags</a>
+
+<!--
+
+                </li><li><a href="http://darryo.github.io/feeds/all.atom.xml" rel="alternate">Atom feed</a></li>
+                <li><a href="http://darryo.github.io/feeds/rss.xml" rel="alternate">RSS feed</a></li>
+-->
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+              
+                
+                <li><a href="/categories/system.html">System</a></li>
+                <li><a href="/categories/algorithmanddatastucture.html">Algorithm and Data Stucture</a></li>
+                <li><a href="/categories/android.html">Android</a></li>
+                <li><a href="/categories/embeddedsystem.html">Embedded System</a></li>
+                <li><a href="/categories/linux.html">Linux</a></li>
+                 <li><a href="/categories/lifeinZJU.html">Life In ZJU</a></li>
+                <li><a href="/categories/learningJapanese.html">Learning Japanese</a></li>
+                <li><a href="/categories/unclassified.html">Unclassified</a></li>
+                
+                   
+            </ul>
+            </div>
+
+
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="https://github.com/Princever">GitHub</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>
+        </div>
+        </div>
+        </div>
+
+    
+      <footer class="site-footer">
+
+        <span class="site-footer-credits">This page was designed by <a href="http://weibo.com/u/1831185433">Prince</a>. Welcome to my <a href="https://github.com/Princever">Github</a>.</span>
+      </footer>
+
+       
+
+    </section>
+
+  
+  </body>
+</html>
+

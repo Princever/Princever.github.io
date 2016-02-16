@@ -6,8 +6,8 @@ layout: default
 <ul>
  
 
-  {% for post in site.posts %}
- {% if post.categories == "Unclassified" %}
+	{% for post in site.posts %}
+		{% if post.category == "Unclassified" %}
  
     <article id="main_content" class="post">
 
@@ -23,7 +23,7 @@ layout: default
 
     </article>
 
-      {% else %}
-  {% endif %}
-  {% endfor %}
+		{% else %}
+		{% endif %}
+	{% endfor %}
 </ul>
