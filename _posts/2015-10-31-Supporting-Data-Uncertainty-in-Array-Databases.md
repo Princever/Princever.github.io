@@ -155,7 +155,7 @@ SBJ’s performance is not sensitive to large variance tuples when λ=0.9, but s
 
 ### Case Study using SDSS Datasets ###
 
-####Expt 6: Storage
+#### Expt 6: Storage ####
 
 Store- multiple configured with step size <1,1> by our cost model incurs much less storage cost than the index schemes, and it approximates store-mean but with much better performance. Specifically, over 79% tuples have only 1 copy and over 92% tuples have at most 3 copies.
 
