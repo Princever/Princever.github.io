@@ -7,7 +7,6 @@ category: "Database"
 Here is the summary of my work during the internship on day 1.
 
 ### What To Do ###
-
 The main target is about PostgreSQL, a free and open-source database system.
 My work is based on following environment:
 
@@ -31,6 +30,9 @@ Actually we needn't to change the **configure** file, and the we just attach the
 	$ make -j 2
 	$ make install
 
+Here all the installation step was finished.
+
+### Running PostgreSQL ###
 
 
 Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
