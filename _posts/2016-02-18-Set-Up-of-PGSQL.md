@@ -30,5 +30,7 @@ Actually we needn't to change the **configure** file, and the we just attach the
 	$ ./configure --prefix=/your/path/to/PostgreSQL/master --enable-debug --enable-cassert --enable-taptest CFLAGS=-O0
 	$ make -j 2
 	$ make install
-	
+
+
+
 Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
