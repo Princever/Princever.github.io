@@ -6,11 +6,15 @@ category: "Database"
 
 Here is the summary of my work during the internship on day 1.
 
-### What TO Do ###
+### What To Do ###
 
 The main target is about PostgreSQL, a free and open-source database system.
 
 My work is based on following environment:
+
+
+
+
 
 	OS: Mac OS 10.11;
 	Version: PostgreSQL 9.6devel;
