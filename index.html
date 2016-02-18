@@ -12,15 +12,19 @@ layout: default
       <h2><b><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></b></h2>
 
       <br>
-
-      <div class="entry" style="floatright;">
-        {{ post.excerpt | remove: '<h3>'}}
-        <p align=left><a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a></p>
+      <div style="float:right; text-align:right">
+        <div class="entry">
+          {{ post.excerpt | remove: '<h3>'}}
+          <p align=left><a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a></p>
         
+        </div>
+      <!-- <br>并且内容居右 -->
       </div>
+
       
       <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
-      <br><br>
+      <br>
+      <br>
     </article>
 
   
