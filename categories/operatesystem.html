@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<h2>
+<a id="princevergithubio" class="anchor" href="#princevergithubio" aria-hidden="true"><span class="octicon octicon-link"></span></a>Category - System</h2><br>
+<ul>
+ 
+
+  {% for post in site.posts %}
+ {% if post.category == "Operate System" %}
+ 
+    <article id="main_content" class="post">
+
+      <h2><b><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></b></h2>
+
+      <div class="entry" >
+        {{ post.excerpt | remove: '<h3>'}}
+        <p align=left><a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a></p>
+        
+      </div>
+
+  
+
+    </article>
+
+      {% else %}
+  {% endif %}
+  {% endfor %}
+</ul>
