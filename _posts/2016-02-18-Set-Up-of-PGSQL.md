@@ -56,6 +56,6 @@ Similar, we use
 to stop server.
 
 ### Database SQL ###
-Actually all SQL looks the same, so here we won't illustrate them here. The select, update, delete and querys. etc. are the same with we learned in university courses.
+Actually all SQL looks the same, so here we won't illustrate them here. The select, update, delete and queries. etc. are the same with we learned in university courses.
 
 Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
