@@ -33,6 +33,29 @@ Actually we needn't to change the **configure** file, and the we just attach the
 Here all the installation step was finished.
 
 ### Running PostgreSQL ###
+For convenience we add the **bin** directory into environment variables in **~/.bashrc**. Such as:
 
+	export PATH=$PATH:/path/to/your/PostgreSQL/master/bin
+
+Before running we should do the initial step with command.
+
+	$ initdb -D data -E UTF8 --no-locale
+
+And then start the db server with:
+
+	$ pg_ctl start -D $PGDATA
+
+Here **PGDATA** is the directory we store our databases. Which actually mean **/path/to/your/PostgreSQL/master/data** here, we added it into environment variables in **~/.bashrc**:
+
+	export PGDATA=/path/to/your/PostgreSQL/master/data
+
+Similar, we use 
+
+	$ pg_ctl stop -D $PGDATA
+
+to stop server.
+
+### Database SQL ###
+Actually all SQL looks the same, so here we won't illustrate them here. The select, update, delete and querys. etc. are the same with we learned in university courses.
 
 Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
