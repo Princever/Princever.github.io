@@ -192,7 +192,7 @@ Similarly, we can use **down** command to go downwards from caller to callee.
 Finally we used **c** command again, and the execution of query will continue and some output appeared.
 
 	postgres=# select 1;
- 	?column? 
+	 ?column? 
 	----------
 	        1
 	(1 row)
