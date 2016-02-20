@@ -46,11 +46,11 @@ After a reboot, the certificate is already avaliable.
 
 ### Debug PostgreSQL With GDB ###
 
-First we start the database with order:
+First we start the database.
 
 	$ pg_ctl start -D $PGDATA
 
-Then we login in as the default user:
+Then we login in as the default user.
 
 	PrinceMacbook:~ Prince$ psql postgres
 	psql (9.6devel)
