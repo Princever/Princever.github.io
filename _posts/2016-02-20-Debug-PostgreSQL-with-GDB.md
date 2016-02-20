@@ -74,7 +74,7 @@ and we can find the idle process with id of 793.
 	792 s000  S+     0:00.01 psql postgres
 	985 s002  R+     0:00.00 grep post
 
-Then we use `gdb postgres 6150` to debug.
+Then we use `gdb postgres 793` to debug.
 
 	PrinceMacbook:~ Prince$ gdb postgres 793
 	GNU gdb (GDB) 7.10
