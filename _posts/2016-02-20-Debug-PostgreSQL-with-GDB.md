@@ -55,7 +55,7 @@ Then we login in as the default user:
 	PrinceMacbook:~ Prince$ psql postgres
 	psql (9.6devel)
 	Type "help" for help.
-	
+
 	postgres=# 
 
 Then we open another termial and find the process id of the postgreSQL.
@@ -64,15 +64,15 @@ Then we open another termial and find the process id of the postgreSQL.
 
 and we can find the idle process with id of 793.
 
-  	599   ??  Ss     0:00.00 postgres: checkpointer process     
-  	600   ??  Ss     0:00.05 postgres: writer process     
-  	601   ??  Ss     0:00.01 postgres: wal writer process     
-  	602   ??  Ss     0:00.01 postgres: autovacuum launcher process     
-  	603   ??  Ss     0:00.01 postgres: stats collector process     
-  	793   ??  Ss     0:00.00 postgres: Prince postgres [local] idle  
-  	597 s000  S      0:00.03 /Applications/PostgreSQL/pgsql/master/bin/postgres -D /Applications/PostgreSQL/pgsql/master/data
-  	792 s000  S+     0:00.01 psql postgres
-   1119 s002  R+     0:00.00 grep post
+	599   ??  Ss     0:00.00 postgres: checkpointer process     
+	600   ??  Ss     0:00.05 postgres: writer process     
+	601   ??  Ss     0:00.01 postgres: wal writer process     
+	602   ??  Ss     0:00.01 postgres: autovacuum launcher process     
+	603   ??  Ss     0:00.01 postgres: stats collector process     
+	793   ??  Ss     0:00.00 postgres: Prince postgres [local] idle  
+	597 s000  S      0:00.03 /Applications/PostgreSQL/pgsql/master/bin/postgres -D /Applications/PostgreSQL/pgsql/master/data
+	792 s000  S+     0:00.01 psql postgres
+	985 s002  R+     0:00.00 grep post
 
 Then we use `gdb postgres 6150` to debug.
 
@@ -106,7 +106,7 @@ Then we type a query, for example, `select 1;`. The termial will pause and outpu
 
 	(gdb) c
 	Continuing.
-	
+
 	Breakpoint 1, ExecResult (node=0x7fbdc90a6d50) at nodeResult.c:75
 	75		econtext = node->ps.ps_ExprContext;
 	(gdb) 
@@ -196,7 +196,7 @@ Finally we used **c** command again, and the execution of query will continue an
 	----------
 	        1
 	(1 row)
-	
+
 	postgres=# 
 
 As for another termial, we use **Quit** to quit gdb at the next breakpoint.
@@ -210,7 +210,7 @@ As for another termial, we use **Quit** to quit gdb at the next breakpoint.
 	A debugging session is active.
 
 		Inferior 1 [process 793] will be detached.
-	
+
 	Quit anyway? (y or n) y
 	Detaching from program: /Applications/PostgreSQL/pgsql/master/bin/postgres, process 793
 
