@@ -7,6 +7,7 @@ category: "Database"
 Here is the summary of my work during the internship on day 1.
 
 ### What To Do ###
+
 The main target is about PostgreSQL, a free and open-source database system.
 My work is based on following environment:
 
@@ -19,6 +20,7 @@ My work is based on following environment:
 ---------------------
 
 ### Installation of PostgreSQL ###
+
 The first thing to to is to install pgSQL, first we can get the source code of lastest version by using git:
 
 	$ git clone git://git.postgresql.org/git/postgresql.git
@@ -33,6 +35,7 @@ Actually we needn't to change the **configure** file, and the we just attach the
 Here all the installation step was finished.
 
 ### Running PostgreSQL ###
+
 For convenience we add the **bin** directory into environment variables in **~/.bashrc**. Such as:
 
 	export PATH=$PATH:/path/to/your/PostgreSQL/master/bin
@@ -56,6 +59,7 @@ Similar, we use
 to stop server.
 
 ### Database SQL ###
+
 Actually all SQL looks the same, so here we won't illustrate them here. The select, update and delete queries. etc. are the same with what we learned in university courses.
 
 Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
