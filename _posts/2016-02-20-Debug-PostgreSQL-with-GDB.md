@@ -31,7 +31,7 @@ Because of the security system of the new kernal for mac, GDB is not to allowed 
 4. Now the certificate has been established.
 ![]({{ site.baseurl }}/res/images/gdbpgsql/5.png)
 
-5. Let's select **Always Trust** in `Get Info \rightarrow Trust \rightarrow Code Signing` when right-clicking.
+5. Let's select **Always Trust** in `Get Info → Trust → Code Signing` when right-clicking.
 ![]({{ site.baseurl }}/res/images/gdbpgsql/6.png)
 
 Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
