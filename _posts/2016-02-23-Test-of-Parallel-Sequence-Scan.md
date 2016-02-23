@@ -6,6 +6,9 @@ category: "Database"
 
 We tried to test the performance of **parallel seq scan**, a new feature in version 9.6, postgreSQL.
 
+
+
+
 ### Output Some Logs ###
 
 To record, or, to get access to know about time information of a process, we need to output some logs. We implemented this by adding a few lines in the source code.
