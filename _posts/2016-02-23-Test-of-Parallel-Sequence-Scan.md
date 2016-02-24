@@ -104,14 +104,6 @@ Then we did `make` and `make install` again, restarted the database and then wer
 	psql (9.6devel)
 	Type "help" for help.
 
-	postgres=# set client_min_messages='notice';
-	LOG:  In exec_simple_query(), start time=1456242163.189879
-	 
-	LOG:  In exec_simple_query(), end time=1456242163.190244
-		
-	LOG:  In exec_simple_query(), running time=0.000365
-	
-	SET
 	postgres=# select 1;
 	LOG:  In exec_simple_query(), start time=1456242173.349366
 	
@@ -126,5 +118,5 @@ Then we did `make` and `make install` again, restarted the database and then wer
 
 	postgres=#
 
-We used level **LOG** here to output the information.
+We used level **LOG** here to output the information. If each log repeated twice, remember to do `set client_min_messages='notice'` when connecting to the database.
 
