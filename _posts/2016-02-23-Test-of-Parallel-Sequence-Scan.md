@@ -11,7 +11,7 @@ We tried to test the performance of **parallel seq scan**, a new feature in vers
 
 ### Output Some Logs ###
 
-To record, or, to get access to know about time information of a process, we need to output some logs. We implemented this by adding a few lines in the source code.
+To record, or, to get access to know about run time information of a process, we need to output some logs. We implemented this by adding a few lines in the source code.
 **elog** is a kind of function who outputs logs with string information. In the source code, it looks like:
 
 	#ifdef HAVE__BUILTIN_CONSTANT_P
@@ -69,7 +69,7 @@ The elog has several levels as shown in source code:
 	#define FATAL		21			/* fatal error - abort process */
 	#define PANIC		22			/* take down the other backends with me */
 
-Here we just all a few lines like:
+Here we just added a few lines like:
 
 	struct timeval start,end; 
 
@@ -79,19 +79,19 @@ Here we just all a few lines like:
 
 	gettimeofday(&start, NULL );
 
-	elog(LOG, "start time=%f\n", ( 1000000 * start.tv_sec  + start.tv_usec) / 1000000.0 );
+	elog(LOG, "In exec_simple_query(), start time=%f\n", ( 1000000 * start.tv_sec  + start.tv_usec) / 1000000.0 );
 
 	...
 
 	gettimeofday(&end, NULL );
 
-	elog(LOG, "end time=%f\n", ( 1000000 * end.tv_sec  + end.tv_usec) / 1000000.0 );
+	elog(LOG, "In exec_simple_query(), end time=%f\n", ( 1000000 * end.tv_sec  + end.tv_usec) / 1000000.0 );
 
 	long timeuse =1000000 * ( end.tv_sec - start.tv_sec ) + end.tv_usec - start.tv_usec;
 
-	elog(LOG, "time=%f\n", timeuse /1000000.0 );
+	elog(LOG, "In exec_simple_query(), running time=%f\n", timeuse /1000000.0 );
 
-Then we do `make` and `make install` again, restart the database and then able to find our output.
+Then we did `make` and `make install` again, restarted the database and then were able to find our outputs.
 
 	PrinceMacbook:postgres Prince$ pgstart
 	server starting
@@ -105,19 +105,19 @@ Then we do `make` and `make install` again, restart the database and then able t
 	Type "help" for help.
 
 	postgres=# set client_min_messages='notice';
-	LOG:  start time=1456242163.189879
+	LOG:  In exec_simple_query(), start time=1456242163.189879
 	 
-	LOG:  end time=1456242163.190244
+	LOG:  In exec_simple_query(), end time=1456242163.190244
 		
-	LOG:  time=0.000365
+	LOG:  In exec_simple_query(), running time=0.000365
 	
 	SET
 	postgres=# select 1;
-	LOG:  start time=1456242173.349366
+	LOG:  In exec_simple_query(), start time=1456242173.349366
 	
-	LOG:  end time=1456242173.350068
+	LOG:  In exec_simple_query(), end time=1456242173.350068
 	
-	LOG:  time=0.000702
+	LOG:  In exec_simple_query(), running time=0.000702
 	
 	 ?column? 
 	----------
@@ -126,4 +126,5 @@ Then we do `make` and `make install` again, restart the database and then able t
 
 	postgres=#
 
-We used level **LOG** here to output infos.
+We used level **LOG** here to output the information.
+
