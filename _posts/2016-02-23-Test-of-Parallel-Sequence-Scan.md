@@ -118,5 +118,5 @@ Then we did `make` and `make install` again, restarted the database and then wer
 
 	postgres=#
 
-We used level **LOG** here to output the information. If each log repeated twice, remember to do `set client_min_messages='notice'` when connecting to the database.
+We used level **LOG** here to output information. If each log repeated twice, remember to do `set client_min_messages='notice'` when connecting to the database.
 
