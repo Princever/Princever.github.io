@@ -154,7 +154,7 @@ Flame graphs shown as following:
 
 #### Data Quantity = 3200 k lines ####
 
-+ Parallel degree = 1. Data = 3200 k lines:
+1. Parallel degree = 1. Data = 3200 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                         
@@ -178,7 +178,7 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000-1.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000-1.svg)
 
-+ Parallel degree = 2. Data = 3200 k lines:
+2. Parallel degree = 2. Data = 3200 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                         
@@ -203,7 +203,7 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000-2.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000-2.svg)
 
-+ Parallel degree = 4. Data = 3200 k lines:
+3. Parallel degree = 4. Data = 3200 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                         
@@ -230,7 +230,7 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000-4.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000-4.svg)
 
-+ Parallel degree = 6. Data = 3200 k lines:
+4. Parallel degree = 6. Data = 3200 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                         
@@ -259,7 +259,7 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000-6.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000-6.svg)
 
-+ Parallel degree = 8. Data = 3200 k lines:
+5. Parallel degree = 8. Data = 3200 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                         
@@ -292,7 +292,7 @@ Flame graphs shown as following:
 
 #### Data Quantity = 8000 k lines ####
 
-+ Parallel degree = 1. Data = 8000 k lines:
+1. Parallel degree = 1. Data = 8000 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                       
@@ -316,7 +316,7 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/5000-1.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/5000-1.svg)
 
-+ Parallel degree = 2. Data = 8000 k lines:
+2. Parallel degree = 2. Data = 8000 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                       
@@ -341,7 +341,7 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/5000-2.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/5000-2.svg)
 
-+ Parallel degree = 4. Data = 8000 k lines:
+3. Parallel degree = 4. Data = 8000 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                        
@@ -368,7 +368,7 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/5000-4.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/5000-4.svg)
 
-+ Parallel degree = 6. Data = 8000 k lines:
+4. Parallel degree = 6. Data = 8000 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                        
@@ -397,7 +397,7 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/5000-6.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/5000-6.svg)
 
-+ Parallel degree = 8. Data = 8000 k lines:
+5. Parallel degree = 8. Data = 8000 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                        
@@ -428,7 +428,7 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/5000-8.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/5000-8.svg)
 
-+ Parallel degree = 9. Data = 8000 k lines:
+6. Parallel degree = 9. Data = 8000 k lines:
 
 		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                        
