@@ -120,3 +120,35 @@ Then we did `make` and `make install` again, restarted the database and then wer
 
 We used level **LOG** here to output information. If each log repeated twice, remember to do `set client_min_messages='notice'` when connecting to the database.
 
+### Generate Flame Graph With Perf ###
+
+With perf already installed, we `cd` into its directory, run the command:
+
+	# perf record -p pid -F 99 -ag -- sleep time
+
+For a server, the postgresSQL should not be ran with the root account, and perf should not be ran as not the root account. It means we should open two ssh terminals.
+
+Using `ps aux|grep post` finding the process, then we can use perf.
+
+	root@devpg03 FlameGraph]# perf record -p 11097 -F 99 -ag -- sleep 10
+	Warning:
+	PID/TID switch overriding SYSTEM[ perf record: Woken up 1 times to write data ]
+	[ perf record: Captured and wrote 0.206 MB perf.data (~9006 samples) ]
+
+After this we use following commands to output the results into flame graph.
+
+	[root@devpg03 FlameGraph]# perf script | ./stackcollapse-perf.pl > out.perf-folded
+	[root@devpg03 FlameGraph]# cat out.perf-folded | ./flamegraph.pl > perf-test2.svg
+
+Also we can use `# perf report --stdio` to view the result in terminal.
+
+Flame graphs shown as following:
+
++ When quantity of data is 16k:
+![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/1.svg)
+
++ When quantity of data is 1600k:
+![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/1.svg)
+
+
+Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
