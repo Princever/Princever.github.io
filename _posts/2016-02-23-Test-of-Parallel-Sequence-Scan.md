@@ -155,7 +155,6 @@ Flame graphs shown as following:
 #### Data Quantity = 3200 k lines ####
 
 + Parallel degree = 1. Data = 3200 k lines:
-
 	postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
 	                                                                  QUERY PLAN                         
 	                                          
