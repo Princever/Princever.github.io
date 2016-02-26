@@ -144,11 +144,11 @@ Also we can use `# perf report --stdio` to view the result in terminal.
 
 Flame graphs shown as following:
 
-+ When quantity of data is 16k:
++ When quantity of data is 16k(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/1.svg">detials</a>):
 ![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/1.svg)
 
-+ When quantity of data is 1600k:
-![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/1.svg)
++ When quantity of data is 1600k(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2.svg">detials</a>):
+![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2.svg)
 
 
 Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
