@@ -155,25 +155,26 @@ Flame graphs shown as following:
 #### Data Quantity = 3200 k lines ####
 
 + Parallel degree = 1. Data = 3200 k lines:
-	postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
-	                                                                  QUERY PLAN                         
-	                                          
-	-----------------------------------------------------------------------------------------------------
-	------------------------------------------
-	 Gather  (cost=1000.00..4750277.34 rows=1 width=97) (actual time=59445.496..59445.496 rows=0 loops=1)
-	   Output: aid, bid, abalance, filler
-	   Number of Workers: 1
-	   ->  Parallel Seq Scan on public.pgbench_accounts  (cost=0.00..4749277.24 rows=1 width=97) (actual 
-	time=59443.601..59443.601 rows=0 loops=2)
-	         Output: aid, bid, abalance, filler
-	         Filter: (pgbench_accounts.filler = 'foo'::bpchar)
-	         Rows Removed by Filter: 100000000
-	         Worker 0: actual time=59441.983..59441.983 rows=0 loops=1
-	 Planning time: 0.114 ms
-	 Execution time: 59446.175 ms
-	(10 rows)
 
-	postgres=# 
+		postgres=# EXPLAIN ANALYZE VERBOSE select * from pgbench_accounts where filler = 'foo';
+		                                                                  QUERY PLAN                         
+		                                          
+		-----------------------------------------------------------------------------------------------------
+		------------------------------------------
+		 Gather  (cost=1000.00..4750277.34 rows=1 width=97) (actual time=59445.496..59445.496 rows=0 loops=1)
+		   Output: aid, bid, abalance, filler
+		   Number of Workers: 1
+		   ->  Parallel Seq Scan on public.pgbench_accounts  (cost=0.00..4749277.24 rows=1 width=97) (actual 
+		time=59443.601..59443.601 rows=0 loops=2)
+		         Output: aid, bid, abalance, filler
+		         Filter: (pgbench_accounts.filler = 'foo'::bpchar)
+		         Rows Removed by Filter: 100000000
+		         Worker 0: actual time=59441.983..59441.983 rows=0 loops=1
+		 Planning time: 0.114 ms
+		 Execution time: 59446.175 ms
+		(10 rows)
+		
+		postgres=# 
 
 Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000-1.svg">detials</a>):
 ![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000-1.svg)
