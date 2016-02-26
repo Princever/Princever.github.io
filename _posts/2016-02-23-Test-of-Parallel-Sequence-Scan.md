@@ -173,11 +173,11 @@ Flame graphs shown as following:
 		 Planning time: 0.114 ms
 		 Execution time: 59446.175 ms
 		(10 rows)
-		
+
 		postgres=# 
 
-Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000-1.svg">detials</a>):
-![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000-1.svg)
+	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000-1.svg">detials</a>):
+	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000-1.svg)
 
 + Parallel degree = 2. Data = 3200 k lines:
 
