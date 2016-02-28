@@ -459,6 +459,287 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/5000-9.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/5000-9.svg)
 
+#### With Modified Parallel Degree Stratage When Data Quantity = 3200 k lines ####
+
+1. Parallel degree = 0. Data = 3200 k lines:
+
+		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
+		                                                            QUERY PLAN                               
+		                             
+		-----------------------------------------------------------------------------------------------------
+		-----------------------------
+		 Seq Scan on public.pgbench_accounts  (cost=0.00..5778689.00 rows=1 width=97) (actual time=117252.556..117252.556 rows=0 loops=1)
+		   Output: aid, bid, abalance, filler
+		   Filter: (pgbench_accounts.filler = 'foo'::bpchar)
+		   Rows Removed by Filter: 200000000
+		   Buffers: shared hit=2144 read=3276545
+		 Planning time: 0.097 ms
+		 Execution time: 117252.588 ms
+		(7 rows)
+
+		postgres=# 
+
+	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-0.svg">detials</a>):
+	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-0.svg)
+
+2. Parallel degree = 1. Data = 3200 k lines:
+
+		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
+		                                                                  QUERY PLAN                         
+	                                          
+		-----------------------------------------------------------------------------------------------------
+		------------------------------------------
+		 Gather  (cost=1000.00..4750277.34 rows=1 width=97) (actual time=59795.382..59795.382 rows=0 loops=1)
+		   Output: aid, bid, abalance, filler
+		   Number of Workers: 1
+		   Buffers: shared hit=2229 read=3276513
+		   ->  Parallel Seq Scan on public.pgbench_accounts  (cost=0.00..4749277.24 rows=1 width=97) (actual time=59761.987..59761.987 rows=0 loops=2)
+		         Output: aid, bid, abalance, filler
+		         Filter: (pgbench_accounts.filler = 'foo'::bpchar)
+		         Rows Removed by Filter: 100000000
+		         Buffers: shared hit=2176 read=3276513
+		         Worker 0: actual time=59744.723..59744.723 rows=0 loops=1
+		           Buffers: shared hit=1054 read=1643659
+		 Planning time: 0.147 ms
+		 Execution time: 59796.119 ms
+		(13 rows)
+
+		postgres=# 
+
+	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-1.svg">detials</a>):
+	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-1.svg)
+
+3. Parallel degree = 2. Data = 3200 k lines:
+
+		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
+		                                                                  QUERY PLAN                         
+		                                          
+		-----------------------------------------------------------------------------------------------------
+		------------------------------------------
+		 Gather  (cost=1000.00..4321355.77 rows=1 width=97) (actual time=39985.548..39985.548 rows=0 loops=1)
+		   Output: aid, bid, abalance, filler
+		   Number of Workers: 2
+		   Buffers: shared hit=2346 read=3276449
+		   ->  Parallel Seq Scan on public.pgbench_accounts  (cost=0.00..4320355.67 rows=0 width=97) (actual time=39982.959..39982.959 rows=0 loops=3)
+		         Output: aid, bid, abalance, filler
+		         Filter: (pgbench_accounts.filler = 'foo'::bpchar)
+		         Rows Removed by Filter: 66666667
+		         Buffers: shared hit=2240 read=3276449
+		         Worker 0: actual time=39981.803..39981.803 rows=0 loops=1
+		           Buffers: shared hit=753 read=1095691
+		         Worker 1: actual time=39981.821..39981.821 rows=0 loops=1
+		           Buffers: shared hit=713 read=1097414
+		 Planning time: 0.134 ms
+		 Execution time: 39986.251 ms
+		(15 rows)
+
+		postgres=# 
+
+	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-2.svg">detials</a>):
+	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-2.svg)
+
+4. Parallel degree = 4. Data = 3200 k lines:
+
+		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
+		                                                                  QUERY PLAN                         
+		                                          
+		-----------------------------------------------------------------------------------------------------
+		------------------------------------------
+		 Gather  (cost=1000.00..3904689.10 rows=1 width=97) (actual time=24150.869..24150.869 rows=0 loops=1)
+		   Output: aid, bid, abalance, filler
+		   Number of Workers: 4
+		   Buffers: shared hit=2548 read=3276353
+		   ->  Parallel Seq Scan on public.pgbench_accounts  (cost=0.00..3903689.00 rows=0 width=97) (actual time=24147.704..24147.704 rows=0 loops=5)
+		         Output: aid, bid, abalance, filler
+		         Filter: (pgbench_accounts.filler = 'foo'::bpchar)
+		         Rows Removed by Filter: 40000000
+		         Buffers: shared hit=2336 read=3276353
+		         Worker 0: actual time=24146.809..24146.809 rows=0 loops=1
+		           Buffers: shared hit=457 read=651822
+		         Worker 1: actual time=24147.129..24147.129 rows=0 loops=1
+		           Buffers: shared hit=457 read=657474
+		         Worker 2: actual time=24146.803..24146.803 rows=0 loops=1
+		           Buffers: shared hit=455 read=651824
+		         Worker 3: actual time=24147.244..24147.244 rows=0 loops=1
+		           Buffers: shared hit=469 read=660107
+		 Planning time: 0.117 ms
+		 Execution time: 24151.620 ms
+		(19 rows)
+
+		postgres=# 
+
+	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-4.svg">detials</a>):
+	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-4.svg)
+
+5. Parallel degree = 8. Data = 3200 k lines:
+		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
+		                                                                  QUERY PLAN                         
+		                                          
+		-----------------------------------------------------------------------------------------------------
+		------------------------------------------
+		 Gather  (cost=1000.00..3592189.10 rows=1 width=97) (actual time=13469.517..13469.517 rows=0 loops=1)
+		   Output: aid, bid, abalance, filler
+		   Number of Workers: 8
+		   Buffers: shared hit=2920 read=3276193
+		   ->  Parallel Seq Scan on public.pgbench_accounts  (cost=0.00..3591189.00 rows=0 width=97) (actual time=13465.812..13465.812 rows=0 loops=9)
+		         Output: aid, bid, abalance, filler
+		         Filter: (pgbench_accounts.filler = 'foo'::bpchar)
+		         Rows Removed by Filter: 22222222
+		         Buffers: shared hit=2496 read=3276193
+		         Worker 0: actual time=13465.122..13465.122 rows=0 loops=1
+		           Buffers: shared hit=278 read=364187
+		         Worker 1: actual time=13465.059..13465.059 rows=0 loops=1
+		           Buffers: shared hit=271 read=362618
+		         Worker 2: actual time=13465.323..13465.323 rows=0 loops=1
+		           Buffers: shared hit=276 read=365799
+		         Worker 3: actual time=13465.278..13465.278 rows=0 loops=1
+		           Buffers: shared hit=278 read=363548
+		         Worker 4: actual time=13465.582..13465.582 rows=0 loops=1
+		           Buffers: shared hit=278 read=365418
+		         Worker 5: actual time=13465.286..13465.286 rows=0 loops=1
+		           Buffers: shared hit=275 read=363551
+		         Worker 6: actual time=13465.761..13465.761 rows=0 loops=1
+		           Buffers: shared hit=276 read=366019
+		         Worker 7: actual time=13465.774..13465.774 rows=0 loops=1
+		           Buffers: shared hit=273 read=363183
+		 Planning time: 0.112 ms
+		 Execution time: 13470.236 ms
+		(27 rows)
+
+		postgres=# 
+
+	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-8.svg">detials</a>):
+	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-8.svg)
+
+6. Parallel degree = 16. Data = 3200 k lines:
+
+		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
+		                                                                  QUERY PLAN                         
+		                                         
+		-----------------------------------------------------------------------------------------------------
+		-----------------------------------------
+		 Gather  (cost=1000.00..3435939.10 rows=1 width=97) (actual time=8866.598..8866.598 rows=0 loops=1)
+		   Output: aid, bid, abalance, filler
+		   Number of Workers: 16
+		   Buffers: shared hit=1680 read=3277857
+		   ->  Parallel Seq Scan on public.pgbench_accounts  (cost=0.00..3434939.00 rows=0 width=97) (actual time=8861.451..8861.451 rows=0 loops=17)
+		         Output: aid, bid, abalance, filler
+		         Filter: (pgbench_accounts.filler = 'foo'::bpchar)
+		         Rows Removed by Filter: 11764706
+		         Buffers: shared hit=832 read=3277857
+		         Worker 0: actual time=8859.796..8859.796 rows=0 loops=1
+		           Buffers: shared hit=44 read=161957
+		         Worker 1: actual time=8859.643..8859.643 rows=0 loops=1
+		           Buffers: shared hit=43 read=161631
+		         Worker 2: actual time=8860.001..8860.001 rows=0 loops=1
+		           Buffers: shared hit=45 read=161391
+		         Worker 3: actual time=8860.171..8860.171 rows=0 loops=1
+		           Buffers: shared hit=44 read=161996
+		         Worker 4: actual time=8860.340..8860.340 rows=0 loops=1
+		           Buffers: shared hit=44 read=208941
+		         Worker 5: actual time=8860.187..8860.187 rows=0 loops=1
+		           Buffers: shared hit=43 read=216364
+		         Worker 6: actual time=8861.568..8861.568 rows=0 loops=1
+		           Buffers: shared hit=42 read=162752
+		         Worker 7: actual time=8861.723..8861.723 rows=0 loops=1
+		           Buffers: shared hit=43 read=213945
+		         Worker 8: actual time=8861.858..8861.858 rows=0 loops=1
+		           Buffers: shared hit=43 read=162878
+		         Worker 9: actual time=8861.925..8861.925 rows=0 loops=1
+		           Buffers: shared hit=62 read=198814
+		         Worker 10: actual time=8862.085..8862.085 rows=0 loops=1
+		           Buffers: shared hit=62 read=175208
+		         Worker 11: actual time=8861.323..8861.323 rows=0 loops=1
+		           Buffers: shared hit=62 read=236455
+		         Worker 12: actual time=8861.925..8861.925 rows=0 loops=1
+		           Buffers: shared hit=62 read=224491
+		         Worker 13: actual time=8862.138..8862.138 rows=0 loops=1
+		           Buffers: shared hit=43 read=184521
+		         Worker 14: actual time=8861.932..8861.932 rows=0 loops=1
+		           Buffers: shared hit=44 read=211549
+		         Worker 15: actual time=8861.907..8861.907 rows=0 loops=1
+		           Buffers: shared hit=62 read=216003
+		 Planning time: 0.109 ms
+		 Execution time: 8867.650 ms
+		(43 rows)
+
+		postgres=#
+
+	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-16.svg">detials</a>):
+	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-16.svg)
+
+7. Parallel degree = 24. Data = 3200 k lines:
+
+		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
+		                                                                  QUERY PLAN                         
+		                                         
+		-----------------------------------------------------------------------------------------------------
+		-----------------------------------------
+		 Gather  (cost=1000.00..3383855.77 rows=1 width=97) (actual time=7847.472..7847.472 rows=0 loops=1)
+		   Output: aid, bid, abalance, filler
+		   Number of Workers: 24
+		   Buffers: shared hit=3448 read=3276513
+		   ->  Parallel Seq Scan on public.pgbench_accounts  (cost=0.00..3382855.67 rows=0 width=97) (actual time=7840.068..7840.068 rows=0 loops=25)
+		         Output: aid, bid, abalance, filler
+		         Filter: (pgbench_accounts.filler = 'foo'::bpchar)
+		         Rows Removed by Filter: 8000000
+		         Buffers: shared hit=2176 read=3276513
+		         Worker 0: actual time=7835.053..7835.053 rows=0 loops=1
+		           Buffers: shared hit=97 read=127747
+		         Worker 1: actual time=7838.093..7838.093 rows=0 loops=1
+		           Buffers: shared hit=89 read=132494
+		         Worker 2: actual time=7837.959..7837.959 rows=0 loops=1
+		           Buffers: shared hit=91 read=130744
+		         Worker 3: actual time=7838.603..7838.603 rows=0 loops=1
+		           Buffers: shared hit=88 read=133042
+		         Worker 4: actual time=7838.783..7838.783 rows=0 loops=1
+		           Buffers: shared hit=89 read=133531
+		         Worker 5: actual time=7838.664..7838.664 rows=0 loops=1
+		           Buffers: shared hit=91 read=133687
+		         Worker 6: actual time=7839.145..7839.145 rows=0 loops=1
+		           Buffers: shared hit=91 read=127882
+		         Worker 7: actual time=7839.181..7839.181 rows=0 loops=1
+		           Buffers: shared hit=91 read=130367
+		         Worker 8: actual time=7839.215..7839.215 rows=0 loops=1
+		           Buffers: shared hit=89 read=135218
+		         Worker 9: actual time=7839.567..7839.567 rows=0 loops=1
+		           Buffers: shared hit=90 read=126644
+		         Worker 10: actual time=7839.601..7839.601 rows=0 loops=1
+		           Buffers: shared hit=90 read=130893
+		         Worker 11: actual time=7839.831..7839.831 rows=0 loops=1
+		           Buffers: shared hit=90 read=129762
+		         Worker 12: actual time=7839.940..7839.940 rows=0 loops=1
+		           Buffers: shared hit=91 read=125501
+		         Worker 13: actual time=7840.016..7840.016 rows=0 loops=1
+		           Buffers: shared read=130324
+		         Worker 14: actual time=7839.967..7839.967 rows=0 loops=1
+		           Buffers: shared hit=91 read=135244
+		         Worker 15: actual time=7840.760..7840.760 rows=0 loops=1
+		           Buffers: shared hit=92 read=129374
+		         Worker 16: actual time=7841.047..7841.047 rows=0 loops=1
+		           Buffers: shared hit=90 read=128296
+		         Worker 17: actual time=7841.049..7841.049 rows=0 loops=1
+		           Buffers: shared hit=91 read=130529
+		         Worker 18: actual time=7841.164..7841.164 rows=0 loops=1
+		           Buffers: shared hit=90 read=131568
+		         Worker 19: actual time=7841.341..7841.341 rows=0 loops=1
+		           Buffers: shared hit=93 read=127192
+		         Worker 20: actual time=7841.522..7841.522 rows=0 loops=1
+		           Buffers: shared hit=88 read=132989
+		         Worker 21: actual time=7841.703..7841.703 rows=0 loops=1
+		           Buffers: shared hit=89 read=132046
+		         Worker 22: actual time=7841.939..7841.939 rows=0 loops=1
+		           Buffers: shared hit=93 read=129622
+		         Worker 23: actual time=7841.702..7841.702 rows=0 loops=1
+		           Buffers: shared hit=90 read=135927
+		 Planning time: 0.121 ms
+		 Execution time: 7848.291 ms
+		(59 rows)
+		
+		postgres=# 
+
+	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-24.svg">detials</a>):
+	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-24.svg)
 
 
 Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
