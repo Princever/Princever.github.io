@@ -45,6 +45,8 @@ The design of test is simple. We run the test on a 12-core server and record the
 
 4. Draw the results in flame graph.
 
+5. For more detials of the test, click <a href="http://princever.github.io/database/2016/02/Test-of-Parallel-Sequence-Scan">here</a>.
+
 ### Test queries ###
 
 We use `EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';` as the query.
@@ -153,6 +155,7 @@ We use `EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench
 ![]({{ site.baseurl }}/res/images/reportofpgsql/1.png)
 ![]({{ site.baseurl }}/res/images/reportofpgsql/2.png)
 
-### Refrences ###
+From the graph we can see, the performance of parallel seq scan is clear linear when the number of workers below 12(Because it is a 12-core server). So as we can imagine, as the number of cores of the server increase, the performance will verge on a linear function.
 
-### Appendix. ###
+
+Thanks for viewing! Don't forget following me on <a href="https://github.com/Princever">GitHub</a>!
