@@ -8,6 +8,10 @@ category: "Database"
 
 It is a report about a Test of Parallel Seq Scan on PostgreSQL. We tested the performance when number of worker threads is 0, 1, 2, 4, 6, 8, 12, 16, 20, 24. Then we visualize the result with perf and flame graph.
 
+
+
+
+
 ### Test design
 
 The design of test is simple. We run the test on a 12-core server and record the running time and workload.
