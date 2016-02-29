@@ -45,7 +45,7 @@ The design of test is simple. We run the test on a 12-core server and record the
 
 4. Draw the results in flame graph.
 
-5. For more detials of the test, click <a href="http://princever.github.io/database/2016/02/Test-of-Parallel-Sequence-Scan">here</a>.
+5. For more detials of the test and flame gpaph, click <a href="http://princever.github.io/database/2016/02/Test-of-Parallel-Sequence-Scan">here</a>.
 
 ### Test queries ###
 
