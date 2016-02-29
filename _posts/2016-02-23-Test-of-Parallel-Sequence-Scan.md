@@ -756,7 +756,72 @@ Flame graphs shown as following:
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-16.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-16.svg)
 
-8. Parallel degree = 24. Data = 3200 k lines:
+9. Parallel degree = 20. Data = 3200 k lines:
+
+		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
+		                                                                  QUERY PLAN                         
+		                                         
+		-----------------------------------------------------------------------------------------------------
+		-----------------------------------------
+		 Gather  (cost=1000.00..3404689.08 rows=1 width=97) (actual time=8057.978..8057.978 rows=0 loops=1)
+		   Output: aid, bid, abalance, filler
+		   Number of Workers: 20
+		   Buffers: shared hit=5092 read=3274657
+		   ->  Parallel Seq Scan on public.pgbench_accounts  (cost=0.00..3403688.98 rows=0 width=97) (actual time=8052.220..8052.220 rows=0 loops=21)
+		         Output: aid, bid, abalance, filler
+		         Filter: (pgbench_accounts.filler = 'foo'::bpchar)
+		         Rows Removed by Filter: 9523810
+		         Buffers: shared hit=4032 read=3274657
+		         Worker 0: actual time=8050.299..8050.299 rows=0 loops=1
+		           Buffers: shared hit=182 read=147018
+		         Worker 1: actual time=8050.192..8050.192 rows=0 loops=1
+		           Buffers: shared hit=181 read=144808
+		         Worker 2: actual time=8050.569..8050.569 rows=0 loops=1
+		           Buffers: shared hit=177 read=146918
+		         Worker 3: actual time=8050.732..8050.732 rows=0 loops=1
+		           Buffers: shared hit=183 read=148824
+		         Worker 4: actual time=8050.752..8050.752 rows=0 loops=1
+		           Buffers: shared hit=179 read=145957
+		         Worker 5: actual time=8050.950..8050.950 rows=0 loops=1
+		           Buffers: shared hit=182 read=147057
+		         Worker 6: actual time=8051.088..8051.088 rows=0 loops=1
+		           Buffers: shared hit=178 read=145613
+		         Worker 7: actual time=8051.212..8051.212 rows=0 loops=1
+		           Buffers: shared hit=184 read=146736
+		         Worker 8: actual time=8051.173..8051.173 rows=0 loops=1
+		           Buffers: shared hit=176 read=143268
+		         Worker 9: actual time=8051.985..8051.985 rows=0 loops=1
+		           Buffers: shared hit=171 read=147076
+		         Worker 10: actual time=8051.679..8051.679 rows=0 loops=1
+		           Buffers: shared hit=178 read=168375
+		         Worker 11: actual time=8052.417..8052.417 rows=0 loops=1
+		           Buffers: shared hit=252 read=190200
+		         Worker 12: actual time=8053.005..8053.005 rows=0 loops=1
+		           Buffers: shared hit=190 read=193366
+		         Worker 13: actual time=8052.798..8052.798 rows=0 loops=1
+		           Buffers: shared hit=196 read=171431
+		         Worker 14: actual time=8053.455..8053.455 rows=0 loops=1
+		           Buffers: shared hit=185 read=169205
+		         Worker 15: actual time=8052.899..8052.899 rows=0 loops=1
+		           Buffers: shared hit=179 read=146660
+		         Worker 16: actual time=8053.421..8053.421 rows=0 loops=1
+		           Buffers: shared hit=182 read=145881
+		         Worker 17: actual time=8053.268..8053.268 rows=0 loops=1
+		           Buffers: shared hit=179 read=146701
+		         Worker 18: actual time=8053.698..8053.698 rows=0 loops=1
+		           Buffers: shared hit=249 read=166242
+		         Worker 19: actual time=8053.621..8053.621 rows=0 loops=1
+		           Buffers: shared hit=249 read=163202
+		 Planning time: 0.116 ms
+		 Execution time: 8059.505 ms
+		(51 rows)
+		
+		postgres=# 
+
+	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-20.svg">detials</a>):
+	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-20.svg)
+
+10. Parallel degree = 24. Data = 3200 k lines:
 
 		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                         
