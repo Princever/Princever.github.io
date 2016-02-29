@@ -602,13 +602,14 @@ Flame graphs shown as following:
 		 Planning time: 0.116 ms
 		 Execution time: 17274.088 ms
 		(23 rows)
-		
+
 		postgres=# 
 
 	Flame Graph(<a href="http://princever.github.io/res/images/Test_of_Parallel_Sequence_Scan/2000m-6.svg">detials</a>):
 	![]({{ site.baseurl }}/res/images/Test_of_Parallel_Sequence_Scan/2000m-6.svg)
 
 6. Parallel degree = 8. Data = 3200 k lines:
+
 		postgres=# EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench_accounts where filler = 'foo';
 		                                                                  QUERY PLAN                         
 		                                          
