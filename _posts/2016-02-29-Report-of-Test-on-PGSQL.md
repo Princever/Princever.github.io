@@ -51,7 +51,7 @@ We use `EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench
 
 ### Results ###
 
-#### 3200k lines ####
+#### Data = 3200k lines ####
 
 <table class="table table-bordered table-striped table-condensed">
    <tr>
@@ -112,7 +112,7 @@ We use `EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench
 </table>
 
 
-#### 8000k lines ####
+#### Data = 8000k lines ####
 
 <table class="table table-bordered table-striped table-condensed">
    <tr>
