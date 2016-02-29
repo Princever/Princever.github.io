@@ -55,60 +55,56 @@ We use `EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench
 
 <table class="table table-bordered table-striped table-condensed">
    <tr>
-      <td>non-para</td>
+      <td>number of workers</td>
+      <td>running time(s)td>
+      <td>efficiency</td>
+   </tr>
+   <tr>
+      <td>no-para</td>
       <td>117,253 </td>
       <td>1.00 </td>
    </tr>
    <tr>
-      <td></td>
       <td>1</td>
       <td>59,796 </td>
       <td>1.96 </td>
    </tr>
    <tr>
-      <td></td>
       <td>2</td>
       <td>39,986 </td>
       <td>2.93 </td>
    </tr>
    <tr>
-      <td></td>
       <td>4</td>
       <td>24,152 </td>
       <td>4.85 </td>
    </tr>
    <tr>
-      <td></td>
       <td>6</td>
       <td>17,274 </td>
       <td>6.79 </td>
    </tr>
    <tr>
-      <td></td>
       <td>8</td>
       <td>13,470 </td>
       <td>8.70 </td>
    </tr>
    <tr>
-      <td></td>
       <td>12</td>
       <td>9,858 </td>
       <td>11.89 </td>
    </tr>
    <tr>
-      <td></td>
       <td>16</td>
       <td>8,868 </td>
       <td>13.22 </td>
    </tr>
    <tr>
-      <td></td>
       <td>20</td>
       <td>8,060 </td>
       <td>14.55 </td>
    </tr>
    <tr>
-      <td></td>
       <td>24</td>
       <td>7,848 </td>
       <td>14.94 </td>
@@ -118,6 +114,11 @@ We use `EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench
 #### 8000k lines ####
 
 <table class="table table-bordered table-striped table-condensed">
+   <tr>
+      <td>number of workers</td>
+      <td>running time(s)td>
+      <td>efficiency</td>
+   </tr>
    <tr>
       <td>1</td>
       <td>221,332 </td>
