@@ -111,6 +111,7 @@ We use `EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench
    </tr>
 </table>
 
+
 #### 8000k lines ####
 
 <table class="table table-bordered table-striped table-condensed">
@@ -145,6 +146,7 @@ We use `EXPLAIN (ANALYZE true, VERBOSE true, BUFFERS true) select * from pgbench
       <td>1.12 </td>
    </tr>
 </table>
+
 
 ### Conclusion and Future work ###
 
