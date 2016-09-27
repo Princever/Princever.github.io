@@ -1,6 +1,6 @@
 ---  
 layout: post
-title: Test of Parallel Sequence Scan
+title: Report of Parallel Sequence Scan
 category: "Database"
 ---  
 
